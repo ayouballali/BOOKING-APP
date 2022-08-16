@@ -1,7 +1,6 @@
 {
   "name": "booking-app",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -15,5 +14,15 @@
     "express": "^4.18.1",
     "mongoose": "^6.5.2",
     "nodemon": "^2.0.19"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayouballali/BOOKING-APP.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ayouballali/BOOKING-APP/issues"
+  },
+  "homepage": "https://github.com/ayouballali/BOOKING-APP#readme",
+  "description": ""
 }
