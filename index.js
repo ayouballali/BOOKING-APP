@@ -27,6 +27,9 @@ mongoose.connection.on("disconnected",()=>{
   console.log("mongodb disconnected");
 })
 
+
+
+
 app.use(express.json());
 
 //middleware 
@@ -34,6 +37,20 @@ app.use('/auth',router)
 app.use('/api/hotels',hotelRot)
 app.use('./users',usersRoute)
 app.use('./rooms',roomsRouter)
+
+// handel errors 
+app.use((err,req,res,next)=>{
+  err.status = err.status ? err.status:500;
+  err.message = err.message ? err.message:"something went wrong" ;
+
+
+  return res.status(err.status).json({
+    success: false,
+    status: err.status,
+    message: err.message,
+    stack: err.stack,
+  });
+})
 
 app.listen(8800, () => {
     connect();
