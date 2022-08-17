@@ -1,9 +1,10 @@
 import express from "express"
+import { createRoom } from "../controllers/room.js";
+import { verifyAdmin } from "../utils/verifyAuth.js";
 
 const roomsRouter = express.Router();
 
-roomsRouter.get("/",(req,res)=>{
-    res.send("it's rooms ")
-})
+// create room 
+roomsRouter.post("/:hotelId",createRoom)
 
-export default roomsRouter
+export default roomsRouter ;

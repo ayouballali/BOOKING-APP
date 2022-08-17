@@ -5,6 +5,7 @@ import router   from "./routes/auth.js";
 import hotelRot from "./routes/hotels.js";
 import roomsRouter from "./routes/rooms.js";
 import usersRoute from "./routes/users.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 // for environment for databse 
@@ -30,9 +31,11 @@ mongoose.connection.on("disconnected",()=>{
 
 
 
-app.use(express.json());
+
 
 //middleware 
+app.use(cookieParser())
+app.use(express.json());
 app.use('/api/auth',router)
 app.use('/api/hotels',hotelRot)
 app.use('/api/users',usersRoute)
@@ -41,7 +44,7 @@ app.use('/api/rooms',roomsRouter)
 // handel errors 
 app.use((err,req,res,next)=>{
 
- 
+ console.log("i am handler")
   err.status = err.status ? err.status:500;
   err.message = err.message ? err.message:"something went wrong" ;
 
