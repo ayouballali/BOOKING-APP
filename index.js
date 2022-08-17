@@ -33,13 +33,15 @@ mongoose.connection.on("disconnected",()=>{
 app.use(express.json());
 
 //middleware 
-app.use('/auth',router)
+app.use('/api/auth',router)
 app.use('/api/hotels',hotelRot)
-app.use('./users',usersRoute)
-app.use('./rooms',roomsRouter)
+app.use('/api/users',usersRoute)
+app.use('/api/rooms',roomsRouter)
 
 // handel errors 
 app.use((err,req,res,next)=>{
+
+ 
   err.status = err.status ? err.status:500;
   err.message = err.message ? err.message:"something went wrong" ;
 
