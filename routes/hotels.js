@@ -1,5 +1,5 @@
 import express from 'express';
-import { createHotel, deleteHotel, getAllHotel, getHotel } from '../controllers/hotels.js';
+import { createHotel, deleteHotel, getAllHotel, getHotel, updateHotel } from '../controllers/hotels.js';
 import Hotel from '../models/Hotel.js';
 import { createError } from '../utils/error.js';
 
@@ -12,12 +12,7 @@ hotelRot.post('/', createHotel)
 
 
 // ---------- ------------UPDATE --------------------- //  
-hotelRot.put('/:id',async (req,res)=>{
-   
-
-    
-
-})
+hotelRot.put('/:id',updateHotel)
 // ---------- ------------DELETE--------------------- //  
 hotelRot.delete("/:id",deleteHotel)
 // ---------- ------------get--------------------- //  
