@@ -6,9 +6,9 @@ export default function Featured() {
 
 
     const { data, loading, error } = useFetch(
-        "/hotels/countByCity?cities=souk sebt,casa"
+       "http://localhost:8800/api/hotels/countByCity?cities=casa,souk sebt"
     );
-    console.log(data);
+  
 
     return (
         <div className='featured'>

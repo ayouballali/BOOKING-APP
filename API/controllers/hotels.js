@@ -30,42 +30,43 @@ export const updateHotel = async (req, res, next) => {
 };
 
 export const deleteHotel = async (req, res, next) => {
-    try {
-        const deletedHotel = await Hotel.findByIdAndRemove(req.params.id)
-        res.status(200).json("hotel successfuly deleted ")
-    } catch (error) {
-        next(error)
-    }
-  };
+  try {
+    const deletedHotel = await Hotel.findByIdAndRemove(req.params.id);
+    res.status(200).json("hotel successfuly deleted ");
+  } catch (error) {
+    next(error);
+  }
+};
 
-  export const getHotel = async (req, res, next) => {
-    try {
-        const hotelFinded = await Hotel.findById(req.params.id)
-        res.status(200).json(hotelFinded)
-    } catch (error) {
-        next(error)
-    }
+export const getHotel = async (req, res, next) => {
+  try {
+    const hotelFinded = await Hotel.findById(req.params.id);
+    res.status(200).json(hotelFinded);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const getAllHotel = async (req, res, next) => {
-    try {
-        const hotelfounded = await Hotel.find()
-        res.status(200).json(hotelfounded)
-    } catch (error) {
-        next(error)
-    }
+  try {
+    const hotelfounded = await Hotel.find();
+    res.status(200).json(hotelfounded);
+  } catch (error) {
+    next(error);
+  }
 };
 
-
 export const getBycities = async (req, res, next) => {
-  const cities = req.query.cities.split(",")
-  console.log(cities)
+  const cities = req.query.cities.split(",");
+
   try {
-      const list = await Promise.all(cities.map((city)=>{
-        return  Hotel.countDocuments({city:city})
-      }))
-      res.status(200).json(list)
+    const list = await Promise.all(
+      cities.map((city) => {
+        return Hotel.countDocuments({ city: city });
+      })
+    );
+    res.status(200).json(list);
   } catch (error) {
-      next(error)
+    next(error);
   }
 };
