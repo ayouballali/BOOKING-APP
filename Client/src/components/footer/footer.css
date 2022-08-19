@@ -1,0 +1,41 @@
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #0071c6;
+}
+a:hover{
+    color: rgb(113, 177, 240);
+}
+
+li{
+    margin-top: 10px;
+}
+.footer{
+    font-size: 12px;
+    width: 1200px;
+}
+
+.fLists{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    padding: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+    .footer{
+        font-size: 8px;
+        width: 300px;
+        
+    }
+
+    .fLists{
+        display: flex;
+        width: 100%;
+       gap: 40px;
+       flex-wrap: wrap;
+       padding: 0;
+    }
+}
