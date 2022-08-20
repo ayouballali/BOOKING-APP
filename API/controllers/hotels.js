@@ -48,8 +48,12 @@ export const getHotel = async (req, res, next) => {
 };
 
 export const getAllHotel = async (req, res, next) => {
+  const { min, max, ...others } = req.query;
   try {
-    const hotelfounded = await Hotel.find();
+    const hotelfounded = await Hotel.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 1000 },
+    }).limit(req.query.limit);
     res.status(200).json(hotelfounded);
   } catch (error) {
     next(error);
@@ -66,6 +70,26 @@ export const getBycities = async (req, res, next) => {
       })
     );
     res.status(200).json(list);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getbyType = async (req, res, next) => {
+  const types = req.query.types.split(",");
+
+  try {
+    const list = await Promise.all(
+      types.map((type) => {
+        return Hotel.countDocuments({ type: type });
+      })
+    );
+    let lisObj = [];
+    let i = 0;
+    types.forEach((elm) => {
+      lisObj.push({ type: elm, count: list[i++] });
+    });
+    res.status(200).json(lisObj);
   } catch (error) {
     next(error);
   }
