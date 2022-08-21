@@ -1,6 +1,6 @@
 import express from 'express';
 import { login } from '../controllers/auth.js';
-import { createHotel, deleteHotel, getAllHotel, getBycities, getbyType, getHotel, updateHotel } from '../controllers/hotels.js';
+import { createHotel, deleteHotel, getAllHotel, getBycities, getbyType, getHotel, getHotelRooms, updateHotel } from '../controllers/hotels.js';
 import Hotel from '../models/Hotel.js';
 import { createError } from '../utils/error.js';
 import { verifyAdmin } from '../utils/verifyAuth.js';
@@ -27,6 +27,11 @@ hotelRot.get("/countByCity",getBycities)
 
 // ---------- ------------getbyType--------------------- //  
 hotelRot.get("/countbyType",getbyType)
+
+// ---------- ------------getroom--------------------- //  
+hotelRot.get("/room/:id",getHotelRooms)
+
+
 
 
 export default hotelRot;

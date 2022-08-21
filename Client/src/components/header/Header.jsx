@@ -7,7 +7,7 @@ import {
     faTaxi,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
@@ -16,10 +16,11 @@ import './header.css'
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import { UserContext } from "../context/UserContext";
 
 export default function Header(props) {
 
-   
+   const {user} = useContext(UserContext)
 
     const [destination,setDestination] = useState();
 
@@ -91,7 +92,7 @@ export default function Header(props) {
                     Get rewarded for your travels – unlock instant savings of 10% or
                     more with a free Lamabooking account
                 </p>
-                <button className="headerBtn">Sign in / Register</button>
+                {!user && <button className="headerBtn">Sign in / Register</button>}
                 <div className="headerSearch">
                     <div className="headerSearchItem">
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />

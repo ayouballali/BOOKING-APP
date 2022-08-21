@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../components/header/Header'
 import Navbar from '../../components/navbar/Navbar'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,8 @@ import './hotel.css'
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
 import useFetch from '../../hooks/useFetch';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { UserContext } from '../../components/context/UserContext';
 
 
 const photos = [
@@ -41,6 +42,7 @@ const photos = [
 export default function Hotel() {
 
   const {state} = useLocation(); 
+  const navigate = useNavigate()
   
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -48,10 +50,12 @@ export default function Hotel() {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
- 
+
+  
  const days = dayDifference(state.state.date[0].endDate,state.state.date[0].startDate);
   const { id } = useParams()
   
+ const {user} = useContext(UserContext);
 
   const [data, loading, errors] = useFetch(
     ` http://localhost:8800/api/hotels/find/${id}`
@@ -73,6 +77,17 @@ export default function Hotel() {
       nbr = 0
     console.log(nbr);
     setImgNbr(nbr)
+  }
+
+  const handleClick = ()=>{
+    if(user){
+      // there is a user 
+      
+    }else{
+      // there is no user 
+      navigate('/login')
+
+    }
   }
 
 
@@ -168,7 +183,7 @@ export default function Hotel() {
                   <h2>
                     <b> ${days * data.cheapestPrice * state.state.option.room}</b> ({days} nights)
                   </h2>
-                  <button>Reserve or Book Now!</button>
+                  <button onClick={handleClick}>Reserve or Book Now!</button>
                 </div>
               </div>
             </>
